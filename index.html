@@ -52,7 +52,7 @@
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `sk-dSGs_Q8PJHGpLW0wDVrlJbbbFAdS3WaIJXBuo76C6IT3BlbkFJ1gdFBS7UAgSuktdbJDKYqUulVftSv20ucsdN3vyZAA` // Replace with your OpenAI API key
+            'Authorization': `Bearer sk-dSGs_Q8PJHGpLW0wDVrlJbbbFAdS3WaIJXBuo76C6IT3BlbkFJ1gdFBS7UAgSuktdbJDKYqUulVftSv20ucsdN3vyZAA`
           },
           body: JSON.stringify({
             model: "gpt-4",
@@ -70,6 +70,10 @@
             temperature: 0.7
           })
         });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
 
         const data = await response.json();
         const recipeSuggestions = data.choices[0].message.content;
